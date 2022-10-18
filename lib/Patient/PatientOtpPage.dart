@@ -22,6 +22,7 @@ class _otpPageWidgetState extends State<otpPageWidget> {
 
   Future<bool> sendSMS() async {
 
+    print("Otp = "+otp);
     try {
 
       String url = 'https://anuragchandra.com/aac_project/Database/ADD/verify_otp.php';
