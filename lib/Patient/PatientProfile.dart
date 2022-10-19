@@ -4,12 +4,14 @@ import 'package:flushbar/flushbar.dart';
 import 'dart:convert';
 
 class PatientProfileWidget extends StatefulWidget {
-  const PatientProfileWidget({Key? key}) : super(key: key);
+  String aadhar;
+  PatientProfileWidget({Key? key, required this.aadhar}) : super(key: key);
 
   @override
   State<PatientProfileWidget> createState() => _PatientProfileWidget();
 }
 
+/*
 class _PatientProfileWidget extends State<PatientProfileWidget> {
   @override
   Widget build(BuildContext context) {
@@ -27,11 +29,13 @@ class EditProfilePage extends StatefulWidget {
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
+ */
 
-class _EditProfilePageState extends State<EditProfilePage> {
+class _PatientProfileWidget extends State<PatientProfileWidget> {
 
   TextEditingController displayNameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
+  TextEditingController emailIdController = TextEditingController();
   bool isLoading = false;
   String? imageUrl;
   bool showPassword = false;
@@ -42,7 +46,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
   var error;
 
   Future<bool> retrievePatientInfo() async {
-    print("Aadhar no = "+aadharNo);
+
+    print("Aadhaar: " + widget.aadhar);
 
     try {
 
@@ -54,13 +59,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(<String, String>{
-          'aadharNo': aadharNo,
+          'aadharNo': widget.aadhar,
         }),
       );
 
       setState(() {
         error = jsonDecode(response.body)['error'];
         name = jsonDecode(response.body)['name'];
+        dob = jsonDecode(response.body)['dob'];
+        emailId = jsonDecode(response.body)['email'];
         print("name = "+name);
       });
 
@@ -75,6 +82,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
       }
       else {
         displayNameController.text = name;
+        ageController.text = dob;
+        emailIdController.text = emailId;
+
         Flushbar(
           title: "Patient details retrieved",
           message: message,
@@ -171,7 +181,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 decoration: const InputDecoration(
                   labelText: "Name",
                   border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.teal)),
+                      borderSide: BorderSide(color: Colors.red)),
                   hintText: 'Input Name',
                 ),
                 controller: displayNameController,
@@ -181,16 +191,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 decoration: const InputDecoration(
                   labelText: "Age",
                   border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.teal)),
+                      borderSide: BorderSide(color: Colors.red)),
                   hintText: 'Input Age',
                 ),
                 controller: ageController,
-                //
                 keyboardType: TextInputType.number,
               ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text("Email: ", style: TextStyle(fontSize: 20),),
+              TextField(
+                decoration: const InputDecoration(
+                  labelText: "EmailId",
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red)),
+                  hintText: 'Email Id',
+                ),
+                controller: emailIdController,
+                keyboardType: TextInputType.number,
               ),
               const SizedBox(
                 height: 35,

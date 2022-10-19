@@ -65,7 +65,7 @@ class _otpPageWidgetState extends State<otpPageWidget> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => const PatientProfileWidget()),
+              builder: (context) => PatientProfileWidget(aadhar: widget.aadhar)),
         );
       }
     }
