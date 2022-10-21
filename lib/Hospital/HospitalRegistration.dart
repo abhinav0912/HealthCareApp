@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 //import 'package:project1/Hospital/PatientHomePage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flushbar/flushbar.dart';
+import 'HospitalOtpPage.dart';
 
 class HospitalRegistrationWidget extends StatefulWidget {
   const HospitalRegistrationWidget({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _HospitalRegistrationWidgetState extends State<HospitalRegistrationWidget>
   var error;
   bool isLoading = true;
   String name = " ";
-  String hospitalId = " ";
+  String id = " ";
   String phoneNo = " ";
   String emailId = " ";
   String diagnosticCenter = " ";
@@ -46,7 +47,7 @@ class _HospitalRegistrationWidgetState extends State<HospitalRegistrationWidget>
           'email': '$emailId',
           'phoneNo': '$phoneNo',
           'address': '$address',
-          'hospitalId': '$hospitalId',
+          'hospitalId': '$id',
           'diagnosticCenter': '$diagnosticCenter',
         }),
       );
@@ -86,7 +87,7 @@ class _HospitalRegistrationWidgetState extends State<HospitalRegistrationWidget>
   }
 
 
-  Widget HospitalName(){
+  Widget hospitalName(){
     return Container(
       padding: const EdgeInsets.all(10),
       child: TextField(
@@ -104,7 +105,7 @@ class _HospitalRegistrationWidgetState extends State<HospitalRegistrationWidget>
     );
   }
 
-  Widget HospitalId(){
+  Widget hospitalId(){
     return Container(
       padding: const EdgeInsets.all(10),
       child: TextField(
@@ -116,13 +117,13 @@ class _HospitalRegistrationWidgetState extends State<HospitalRegistrationWidget>
           //hintText: 'Enter the Name',
         ),
         onChanged: (val2) {
-          hospitalId = val2;
+          id = val2;
         },
       ),
     );
   }
 
-  Widget HospitalPhoneNo(){
+  Widget hospitalPhoneNo(){
     return Container(
       padding: const EdgeInsets.all(10),
       child: TextField(
@@ -141,7 +142,7 @@ class _HospitalRegistrationWidgetState extends State<HospitalRegistrationWidget>
   }
 
 
-  Widget HospitalemailId(){
+  Widget hospitalEmailId(){
     return Container(
       padding: const EdgeInsets.all(10),
       child: TextField(
@@ -160,7 +161,7 @@ class _HospitalRegistrationWidgetState extends State<HospitalRegistrationWidget>
   }
 
 
-  Widget HospitaldiagnosticCenter(){
+  Widget hospitalDiagnosticCenter(){
     return Container(
       padding: const EdgeInsets.all(10),
       child: TextField(
@@ -178,7 +179,7 @@ class _HospitalRegistrationWidgetState extends State<HospitalRegistrationWidget>
     );
   }
 
-  Widget HospitalAddress(){
+  Widget hospitalAddress(){
     return Container(
       padding: const EdgeInsets.all(10),
       child: TextField(
@@ -207,12 +208,12 @@ class _HospitalRegistrationWidgetState extends State<HospitalRegistrationWidget>
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              HospitalName(),
-              HospitalId(),
-              HospitalPhoneNo(),
-              HospitalAddress(),
-              HospitalemailId(),
-              HospitaldiagnosticCenter(),
+              hospitalName(),
+              hospitalId(),
+              hospitalPhoneNo(),
+              hospitalAddress(),
+              hospitalEmailId(),
+              hospitalDiagnosticCenter(),
 
               SizedBox(
                 height: 0,
@@ -227,22 +228,14 @@ class _HospitalRegistrationWidgetState extends State<HospitalRegistrationWidget>
                     onPrimary: Colors.white,
                     shape: const BeveledRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
                   ), onPressed: () {
-
                   sendSMS();
-                  /*
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePageWidget()),
-                );
-
-                   */
-                  print(name);
-                  print(phoneNo);
-                  print(hospitalId);
-                  print(address);
-                  print(emailId);
-                  print(diagnosticCenter);
-                },),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>  hospitalOtpPageWidget(hospitalId: id)),
+                  );
+                },
+                ),
               )
             ],
           ),

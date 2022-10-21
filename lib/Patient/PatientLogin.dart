@@ -62,7 +62,7 @@ class _PatientLoginWidgetState extends State<PatientLoginWidget> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => otpPageWidget(aadhar: aadharNo)),
+              builder: (context) => patientOtpPageWidget(aadhar: aadharNo)),
         );
       }
     }
@@ -150,7 +150,7 @@ class _PatientLoginWidgetState extends State<PatientLoginWidget> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                          builder: (context) =>  otpPageWidget(aadhar:aadharNo)),);
+                          builder: (context) =>  patientOtpPageWidget(aadhar:aadharNo)),);
 
                        */
                     },

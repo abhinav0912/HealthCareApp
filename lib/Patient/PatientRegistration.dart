@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:project1/Patient/PatientHomePage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flushbar/flushbar.dart';
-import 'package:project1/Patient/PatientOtpPage.dart';
+
+import 'PatientOtpPage.dart';
 
 class PatientRegistrationWidget extends StatefulWidget {
   const PatientRegistrationWidget({Key? key}) : super(key: key);
@@ -297,7 +298,7 @@ class _PatientRegistrationWidgetState extends State<PatientRegistrationWidget> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>  otpPageWidget(aadhar:aadharNo)),
+                      builder: (context) =>  patientOtpPageWidget(aadhar:aadharNo)),
                 );
               },
               ),

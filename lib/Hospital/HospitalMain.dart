@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project1/Hospital/HospitalRegistration.dart';
+
+import 'HospitalLogin.dart';
 //import 'package:project1/Hospital/HospitalLogin.dart';
 //import 'package:project1/Hospital/PatientHomePage.dart';
 
@@ -38,13 +40,13 @@ class _HospitalMainWidgetState extends State<HospitalMainWidget> {
             shape: const BeveledRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5))),
           ),
-          onPressed: () {/*
+          onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => const HospitalLoginWidget()),
             );
-         */ },
+          },
         ),
       ],
     );

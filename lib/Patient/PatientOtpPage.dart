@@ -4,16 +4,16 @@ import 'package:project1/Patient/PatientProfile.dart';
 import 'package:http/http.dart' as http;
 import 'package:flushbar/flushbar.dart';
 
-class otpPageWidget extends StatefulWidget {
+class patientOtpPageWidget extends StatefulWidget {
   final String aadhar;
 
-  otpPageWidget({Key? key, required this.aadhar}) : super(key: key);
+  patientOtpPageWidget({Key? key, required this.aadhar}) : super(key: key);
 
   @override
-  State<otpPageWidget> createState() => _otpPageWidgetState();
+  State<patientOtpPageWidget> createState() => _patientOtpPageWidgetState();
 }
 
-class _otpPageWidgetState extends State<otpPageWidget> {
+class _patientOtpPageWidgetState extends State<patientOtpPageWidget> {
   TextEditingController otpController = TextEditingController();
 
   var error;
@@ -25,7 +25,7 @@ class _otpPageWidgetState extends State<otpPageWidget> {
     print("Otp = "+otp);
     try {
 
-      String url = 'https://anuragchandra.com/aac_project/Database/ADD/verify_otp.php';
+      String url = 'https://anuragchandra.com/aac_project/Database/ADD/patient_verify_otp.php';
 
       print(otp);
 
@@ -107,7 +107,7 @@ class _otpPageWidgetState extends State<otpPageWidget> {
     ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 30));
     return Scaffold(
         appBar: AppBar(
-            title: Text('Patient Registration')
+            title: Text('Patient OTP')
         ),
         body: SingleChildScrollView(
           child: Column(

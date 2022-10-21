@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:project1/Hospital/HospitalRegistration.dart';
-//import 'package:project1/Hospital/PatientHomePage.dart';
+import 'package:project1/Hospital/HospitalOtpPage.dart';
+import 'package:http/http.dart' as http;
+import 'package:project1/Hospital/HospitalVisitDetails.dart';
+import 'package:flushbar/flushbar.dart';
+import 'dart:convert';
 
 class HospitalLoginWidget extends StatefulWidget {
   const HospitalLoginWidget({Key? key}) : super(key: key);
@@ -8,19 +12,72 @@ class HospitalLoginWidget extends StatefulWidget {
   @override
   State<HospitalLoginWidget> createState() => _HospitalLoginWidgetState();
 }
-/*
-class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({Key? key}) : super(key: key);
-
-  @override
-  createState() => HomePageWidget();
-}
-
- */
 
 class _HospitalLoginWidgetState extends State<HospitalLoginWidget> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController hospitalIdController = TextEditingController();
+  TextEditingController emailIdController = TextEditingController();
+
+  String hospitalId = "";
+  String emailId = "";
+  var error;
+
+
+  Future<bool> sendSMS() async {
+
+    try {
+
+      String url = 'https://anuragchandra.com/aac_project/Database/GET/get_Hospital_info.php';
+
+      final http.Response response = await http.post(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'hospitalId': hospitalId,
+          //'name':widget.name,
+          'emailId': emailId,
+        }),
+      );
+
+      setState(() {
+        error = jsonDecode(response.body)['error'];
+      });
+
+      String message = jsonDecode(response.body)['message'];
+      print ("error: " + error.toString() + " message: " + message);
+      if (error) {
+        Flushbar(
+          title: "Sign In Error",
+          message: message,
+          duration: Duration(seconds: 10),
+        )..show(context);
+      } else {
+//        _navigateToSubmitOTP();
+        Flushbar(
+          title: "OTP Success",
+          message: message,
+          duration: Duration(seconds: 10),
+        )..show(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => hospitalOtpPageWidget(hospitalId: hospitalId)),
+        );
+      }
+    }
+    catch (e) {
+      var errorMessage = e.toString();
+      print(e);
+      Flushbar(
+        title: "Sign In Error",
+        message: errorMessage,
+        duration: Duration(seconds: 5),
+      )..show(context);
+      throw Exception('Could not send SMS');
+    }
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,22 +109,28 @@ class _HospitalLoginWidgetState extends State<HospitalLoginWidget> {
               Container(
                 padding: const EdgeInsets.all(10),
                 child: TextField(
-                  controller: nameController,
+                  controller: hospitalIdController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Hospital Id',
+                    labelText: 'hospitalId Number',
                   ),
+                  onChanged: (val1) {
+                    hospitalId = val1;
+                  },
                 ),
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 child: TextField(
-                  obscureText: true,
-                  controller: passwordController,
+                  //obscureText: true,
+                  controller: emailIdController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Password',
+                    labelText: 'EmailId',
                   ),
+                  onChanged: (val2) {
+                    emailId = val2;
+                  },
                 ),
               ),
               TextButton(
@@ -82,15 +145,11 @@ class _HospitalLoginWidgetState extends State<HospitalLoginWidget> {
                   child: ElevatedButton(
                     child: const Text('Login'),
                     onPressed: () {
-                      /*
+                      sendSMS();
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const HomePageWidget()),
-                      );
-                       */
-
-                      print(nameController.text);
-                      print(passwordController.text);
+                          context,
+                          MaterialPageRoute(
+                          builder: (context) =>  hospitalOtpPageWidget(hospitalId:hospitalId)),);
                     },
                   )
               ),

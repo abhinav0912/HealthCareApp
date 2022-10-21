@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:project1/Patient/PatientRegistration.dart';
-import 'package:project1/Patient/PatientHomePage.dart';
+import 'package:project1/Hospital/HospitalHomePage.dart';
 
-class PatientHomePageWidget extends StatefulWidget {
+class HospitalVisitDetailsWidget extends StatefulWidget {
   final String name;
 
-  const PatientHomePageWidget({Key? key, required this.name}) : super(key: key);
+  const HospitalVisitDetailsWidget({Key? key, required this.name}) : super(key: key);
 
   @override
-  State<PatientHomePageWidget> createState() => _PatientHomePageWidgetState();
+  State<HospitalVisitDetailsWidget> createState() => _HospitalVisitDetailsWidgetState();
 }
 
-class _PatientHomePageWidgetState extends State<PatientHomePageWidget> {
+class _HospitalVisitDetailsWidgetState extends State<HospitalVisitDetailsWidget> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 

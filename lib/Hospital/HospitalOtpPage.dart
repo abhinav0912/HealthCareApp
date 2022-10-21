@@ -1,19 +1,20 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:project1/Hospital/HospitalVisitDetails.dart';
 import 'package:project1/Hospital/HospitalHomePage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flushbar/flushbar.dart';
 
-class otpPageWidget extends StatefulWidget {
-  final String aadhar;
+class hospitalOtpPageWidget extends StatefulWidget {
+  final String hospitalId;
 
-  otpPageWidget({Key? key, required this.aadhar}) : super(key: key);
+  hospitalOtpPageWidget({Key? key, required this.hospitalId}) : super(key: key);
 
   @override
-  State<otpPageWidget> createState() => _otpPageWidgetState();
+  State<hospitalOtpPageWidget> createState() => _hospitalOtpPageWidgetState();
 }
 
-class _otpPageWidgetState extends State<otpPageWidget> {
+class _hospitalOtpPageWidgetState extends State<hospitalOtpPageWidget> {
   TextEditingController otpController = TextEditingController();
 
   var error;
@@ -24,7 +25,7 @@ class _otpPageWidgetState extends State<otpPageWidget> {
 
     try {
 
-      String url = 'https://anuragchandra.com/aac_project/Database/ADD/verify_otp.php';
+      String url = 'https://anuragchandra.com/aac_project/Database/ADD/hospital_verify_otp.php';
 
       print(otp);
 
@@ -34,7 +35,7 @@ class _otpPageWidgetState extends State<otpPageWidget> {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(<String, String>{
-          'aadharNo': widget.aadhar,
+          'hospitalId': widget.hospitalId,
           //'name':widget.name,
           'otp': '$otp',
         }),
@@ -106,7 +107,7 @@ class _otpPageWidgetState extends State<otpPageWidget> {
     ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 30));
     return Scaffold(
         appBar: AppBar(
-            title: Text('Hospital Registration')
+            title: Text('Hospital OTP')
         ),
         body: SingleChildScrollView(
           child: Column(
