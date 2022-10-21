@@ -95,7 +95,7 @@ class _HospitalHomePageWidgetState extends State<HospitalHomePageWidget> {
     ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 30));
     return Scaffold(
         appBar: AppBar(
-            title: Text('Hospital Registration')
+            title: Text('Hospital Home Page')
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -120,7 +120,7 @@ class _HospitalHomePageWidgetState extends State<HospitalHomePageWidget> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            HospitalVisitDetails(aadhar: aadharNo)),
+                            HospitalVisitDetailsWidget(aadhar: aadharNo)),
                   );
                 },
                 ),

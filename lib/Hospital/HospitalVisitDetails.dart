@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:project1/Hospital/HospitalHomePage.dart';
 
 class HospitalVisitDetailsWidget extends StatefulWidget {
-  final String name;
+  final String aadhar;
 
-  const HospitalVisitDetailsWidget({Key? key, required this.name}) : super(key: key);
+  const HospitalVisitDetailsWidget({Key? key, required this.aadhar}) : super(key: key);
 
   @override
   State<HospitalVisitDetailsWidget> createState() => _HospitalVisitDetailsWidgetState();

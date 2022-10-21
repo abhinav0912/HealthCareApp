@@ -22,6 +22,7 @@ class _hospitalOtpPageWidgetState extends State<hospitalOtpPageWidget> {
   String otp = " ";
 
   Future<bool> sendSMS() async {
+    print("Hospital Id = " +widget.hospitalId);
 
     try {
 
